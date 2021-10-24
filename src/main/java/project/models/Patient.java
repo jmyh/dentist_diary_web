@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import project.forms.PatientForm;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,13 +21,32 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "patronymic")
+    private String patronymic;  //отчество
+
+    @Column(name = "birthdate")
+    private LocalDate birthdate;
+
+    @Column(name = "address")
+    private String address;
+
+    @OneToMany (mappedBy="patient", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<Visit> visits;
+
 
     public static Patient from(PatientForm form) {
         return Patient.builder()
-                .firstName(form.getFirstName())
-                .lastName(form.getLastName())
+                .name(form.getName())
+                .surname(form.getSurname())
+                .patronymic(form.getPatronymic())
+                .birthdate(form.getBirthdate())
+                .address(form.getAddress())
                 .build();
     }
 }

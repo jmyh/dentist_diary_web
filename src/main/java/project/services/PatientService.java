@@ -1,5 +1,6 @@
 package project.services;
 
+import project.forms.PatientForm;
 import project.models.Patient;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface PatientService {
 
     void deleteOne(Long patientID);
 
-    Patient updateOne(Patient patient);
+    Patient updateOne(PatientForm patient, Long patientID);
 
-    void addOne(Patient patient);
+    void addOne(PatientForm patientForm);
 }

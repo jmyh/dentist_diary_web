@@ -8,7 +8,8 @@ import project.models.Patient;
 import project.services.PatientServiceImpl;
 
 import java.util.List;
-@RestController
+@RestController()
+@RequestMapping("/api")
 public class PatientController {
 
     @Autowired
